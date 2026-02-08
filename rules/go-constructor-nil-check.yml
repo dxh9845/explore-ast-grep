@@ -1,0 +1,25 @@
+id: go-constructor-nil-check
+language: go
+severity: warning
+message: >-
+  Constructor function '$FNAME' has pointer/interface parameters but does not
+  check for nil. Validate parameters and return an error for nil values.
+note: >-
+  Go constructors (functions starting with "New") that accept pointer or
+  interface parameters should guard against nil inputs and return a
+  descriptive error.
+rule:
+  all:
+    - pattern: |
+        func $FNAME($$$PARAMS) ($$$RETURNS) {
+          $$$BODY
+        }
+    - not:
+        has:
+          pattern: $PARAM == nil
+          stopBy: end
+constraints:
+  FNAME:
+    regex: "^New"
+ignores:
+  - "gen/**"

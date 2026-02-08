@@ -1,0 +1,18 @@
+id: go-constructor-nil-check
+valid:
+  - |
+    func NewService(db *Database) (*Service, error) {
+      if db == nil {
+        return nil, fmt.Errorf("db must not be nil")
+      }
+      return &Service{db: db}, nil
+    }
+  - |
+    func DoSomething(db *Database) error {
+      return nil
+    }
+invalid:
+  - |
+    func NewService(db *Database) (*Service, error) {
+      return &Service{db: db}, nil
+    }

@@ -1,0 +1,14 @@
+id: go-constructor-nil-check
+snapshots:
+  ? |
+    func NewService(db *Database) (*Service, error) {
+      return &Service{db: db}, nil
+    }
+  : labels:
+    - source: |-
+        func NewService(db *Database) (*Service, error) {
+          return &Service{db: db}, nil
+        }
+      style: primary
+      start: 0
+      end: 82
